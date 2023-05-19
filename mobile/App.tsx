@@ -1,42 +1,28 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { Text, View, FlatList, TouchableOpacity } from "react-native";
+import { Text, View } from "react-native";
 
-type listData = { id: number; name: string };
+import {
+  useFonts,
+  Roboto_400Regular,
+  Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
+
+import { BaiJamjuree_700Bold } from "@expo-google-fonts/bai-jamjuree";
 
 export default function App() {
-  const [list] = useState<listData[]>([
-    { id: 1, name: "John" },
-    { id: 2, name: "Jane" },
-    { id: 3, name: "Jack" },
-    { id: 4, name: "Jessica" },
-    { id: 5, name: "Jamile" },
-    { id: 6, name: "Jailson" },
-    { id: 7, name: "Jadson" },
-    { id: 8, name: "Jadson" },
-    { id: 9, name: "Jadson" },
-    { id: 10, name: "Jadson" },
-  ]);
+  const [hasLoaderFonts] = useFonts({
+    Roboto_400Regular,
+    Roboto_700Bold,
+    BaiJamjuree_700Bold,
+  });
 
-  function DataList({ name }: { name: string }) {
-    return (
-      <TouchableOpacity className="bg-red-400 w-full h-24 mb-5 items-center justify-center">
-        <Text>{name}</Text>
-      </TouchableOpacity>
-    );
+  if (!hasLoaderFonts) {
+    return null;
   }
 
   return (
-    <View className="flex-1 mt-16 ">
-      <Text className="font-bold">Hello World!</Text>
-
-      <FlatList
-        data={list}
-        keyExtractor={(item: any) => item.id}
-        renderItem={({ item }) => <DataList name={item.name} />}
-        showsVerticalScrollIndicator={false}
-      />
-
+    <View className="flex-1 items-center justify-center bg-gray-900">
+      <Text className="text-5xl  text-gray-50">Rocketsear</Text>
       <StatusBar style="auto" />
     </View>
   );
