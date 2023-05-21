@@ -8,7 +8,6 @@ import {
 import { Signin } from "@/components/Signin";
 import { Hero } from "@/components/Hero";
 import { CopyRight } from "@/components/Copyright";
-import { EmptyMemories } from "@/components/EmptyMemories";
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-roboto" });
 const baijamjuree = BaiJamjuree({
