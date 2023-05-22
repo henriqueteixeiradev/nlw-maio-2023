@@ -9,6 +9,8 @@ export async function authRoutes(app: FastifyInstance) {
       code: Z.string(),
     });
 
+    const userAgent = request.headers["user-agent"] || "";
+
     const { code } = bodySchema.parse(request.body);
 
     const accessTokenResponse = await axios.post(
@@ -16,8 +18,14 @@ export async function authRoutes(app: FastifyInstance) {
       null,
       {
         params: {
-          client_id: process.env.GITHUB_CLIENT_ID,
-          client_secret: process.env.GITHUB_CLIENT_SECRET,
+          client_id:
+            userAgent === "mobile"
+              ? process.env.MOBILE_GITHUB_CLIENT_ID
+              : process.env.WEB_GITHUB_CLIENT_ID,
+          client_secret:
+            userAgent === "mobile"
+              ? process.env.MOBILE_GITHUB_CLIENT_SECRET
+              : process.env.WEB_GITHUB_CLIENT_SECRET,
           code,
         },
         headers: {
